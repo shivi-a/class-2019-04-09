@@ -1,0 +1,44 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(fs)
+library(tidyverse)
+
+```
+Which NJ poll had the biggest support for 3rd parties?
+
+```{r cars}
+
+nj_031_poll <- read.csv("https://raw.githubusercontent.com/TheUpshot/2018-live-poll-results/master/data/elections-poll-nj03-1.csv")
+
+nj_033_poll <- read.csv("https://raw.githubusercontent.com/TheUpshot/2018-live-poll-results/master/data/elections-poll-nj03-3.csv")
+
+nj_071_poll <- read.csv("https://raw.githubusercontent.com/TheUpshot/2018-live-poll-results/master/data/elections-poll-nj07-1.csv")
+
+nj_073_poll <- read.csv("https://raw.githubusercontent.com/TheUpshot/2018-live-poll-results/master/data/elections-poll-nj07-3.csv")
+
+nj_011_poll <- read.csv("https://raw.githubusercontent.com/TheUpshot/2018-live-poll-results/master/data/elections-poll-nj11-3.csv")
+
+```
+
+```{r pressure, echo=FALSE}
+
+nj_011_poll %>% count(response)
+nj_033_poll %>% count(response)
+nj_073_poll %>% count(response)
+
+nj_011_poll %>% filter(!response %in% c("Dem", "Rep", "Und")) %>% nrow()
+
+nj_033_poll %>% filter(!response %in% c("Dem", "Rep", "Und")) %>% nrow()
+
+nj_031_poll %>% filter(!response %in% c("Dem", "Rep", "Und")) %>% nrow()
+
+nj_073_poll %>% filter(!response %in% c("Dem", "Rep", "Und")) %>% nrow()
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
